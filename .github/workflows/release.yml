@@ -31,6 +31,6 @@ jobs:
       - uses: taiki-e/upload-rust-binary-action@v1
         with:
           bin: rain
-          tar: unix
-          zip: windows
+          zip: all 
+          archive: $bin-$tag-$target
           token: ${{ secrets.GITHUB_TOKEN }}
