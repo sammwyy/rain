@@ -6,7 +6,10 @@ use tui::{
     Frame,
 };
 
-use crate::{app::App, components::process_list::process_list};
+use crate::{
+    app::App,
+    components::{process_details::process_details, process_list::process_list},
+};
 
 pub fn ui<B: Backend>(f: &mut Frame<B>, app: &mut App) {
     let size = f.size();
@@ -86,15 +89,11 @@ pub fn ui<B: Backend>(f: &mut Frame<B>, app: &mut App) {
     f.render_stateful_widget(process_list(&mut app.state), center_left, state);
 
     // Process detail
-    let process_detail_area = Block::default()
-        .borders(Borders::all())
-        .border_type(BorderType::Plain)
-        .title(vec![Span::from("Process Details")]);
-    f.render_widget(process_detail_area, center_right);
+    f.render_widget(process_details(&mut app.state), center_right);
 
     // Controls
     let controls_area = Block::default().title(vec![Span::from(
-        "[Q] Quit [1] Name [2] PID [3] RAM [4] CPU [5] DISK",
+        "[Q]Quit [1]Name [2]PID [3]RAM [4]CPU [5]Disk",
     )]);
     f.render_widget(controls_area, bottom_left);
 

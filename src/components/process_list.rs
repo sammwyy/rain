@@ -8,7 +8,7 @@ use tui::{
 use crate::state::State;
 
 pub fn process_list(state: &mut State) -> Table {
-    let selected_style = Style::default().add_modifier(Modifier::REVERSED);
+    let selected_style = Style::default().bg(Color::White).fg(Color::Black);
 
     fn get_style_by_percent(value: u64, max: u64) -> Style {
         let div: f64 = value as f64 / max as f64;
@@ -33,7 +33,7 @@ pub fn process_list(state: &mut State) -> Table {
 
     let header_cells = ["Name", "PID", "Memory", "CPU", "Disk"]
         .iter()
-        .map(|h| Cell::from(*h).style(Style::default().fg(Color::LightMagenta)));
+        .map(|h| Cell::from(*h).style(Style::default().fg(Color::LightBlue)));
 
     let header = Row::new(header_cells).height(1).bottom_margin(1);
 
@@ -58,8 +58,10 @@ pub fn process_list(state: &mut State) -> Table {
         ];
 
         let styles = &mut vec![
+            Style::default()
+                .fg(Color::Cyan)
+                .add_modifier(Modifier::BOLD),
             Style::default().fg(Color::LightCyan),
-            Style::default().fg(Color::White),
             get_style_by_percent(ram_usage as _, state.system.total_memory() / 1024 / 1024),
             get_style_by_percent(cpu_usage as _, 100),
             get_style_by_percent(disk_usage as _, 100),
@@ -74,11 +76,11 @@ pub fn process_list(state: &mut State) -> Table {
         .block(Block::default().borders(Borders::ALL).title("Process List"))
         .highlight_style(selected_style)
         .widths(&[
-            Constraint::Percentage(40),
+            Constraint::Percentage(44),
             Constraint::Percentage(15),
             Constraint::Percentage(15),
-            Constraint::Percentage(15),
-            Constraint::Percentage(15),
+            Constraint::Percentage(7),
+            Constraint::Percentage(19),
         ]);
 
     return component;
