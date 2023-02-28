@@ -81,7 +81,11 @@ pub fn process_details(state: &mut State) -> List {
     });
 
     let items: Vec<ListItem> = spans.map(|span| ListItem::new(span)).collect();
-    let component = List::new(items).block(Block::default().borders(Borders::ALL).title("List"));
+    let component = List::new(items).block(
+        Block::default()
+            .borders(Borders::ALL)
+            .title("Process Details"),
+    );
 
     return component;
 }
