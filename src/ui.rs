@@ -9,7 +9,7 @@ use tui::{
 use crate::{
     app::App,
     components::{
-        process_details::process_details, process_list::process_list,
+        cpu_monitor::cpu_monitor, process_details::process_details, process_list::process_list,
         system_monitor::system_monitor,
     },
 };
@@ -68,12 +68,7 @@ pub fn ui<B: Backend>(f: &mut Frame<B>, app: &mut App) {
     f.render_widget(system_monitor(&mut app.state), top_left);
 
     // CPU Monitor
-    let cpu_monitor_area = Block::default()
-        .borders(Borders::all())
-        .border_type(BorderType::Plain)
-        .title(vec![Span::from("CPU")]);
-
-    f.render_widget(cpu_monitor_area, top_center);
+    f.render_widget(cpu_monitor(&mut app.state), top_center);
 
     // RAM Monitor
     let ram_monitor_area = Block::default()
