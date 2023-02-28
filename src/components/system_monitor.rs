@@ -9,7 +9,7 @@ use tui::{
 
 use crate::state::State;
 
-pub fn system_details(state: &mut State) -> List {
+pub fn system_monitor(state: &mut State) -> List {
     // Misc
     let hostname = state.system.host_name().unwrap_or("Unknown".to_string());
 

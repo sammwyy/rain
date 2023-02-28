@@ -10,7 +10,7 @@ use crate::{
     app::App,
     components::{
         process_details::process_details, process_list::process_list,
-        system_details::system_details,
+        system_monitor::system_monitor,
     },
 };
 
@@ -65,7 +65,7 @@ pub fn ui<B: Backend>(f: &mut Frame<B>, app: &mut App) {
     let bottom_right = bottom_chunks[1];
 
     // System Monitor
-    f.render_widget(system_details(&mut app.state), top_left);
+    f.render_widget(system_monitor(&mut app.state), top_left);
 
     // CPU Monitor
     let cpu_monitor_area = Block::default()
