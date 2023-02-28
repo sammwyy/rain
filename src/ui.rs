@@ -8,7 +8,10 @@ use tui::{
 
 use crate::{
     app::App,
-    components::{process_details::process_details, process_list::process_list},
+    components::{
+        process_details::process_details, process_list::process_list,
+        system_details::system_details,
+    },
 };
 
 pub fn ui<B: Backend>(f: &mut Frame<B>, app: &mut App) {
@@ -62,12 +65,7 @@ pub fn ui<B: Backend>(f: &mut Frame<B>, app: &mut App) {
     let bottom_right = bottom_chunks[1];
 
     // System Monitor
-    let system_monitor = Block::default()
-        .borders(Borders::all())
-        .border_type(BorderType::Plain)
-        .title(vec![Span::from("System")]);
-
-    f.render_widget(system_monitor, top_left);
+    f.render_widget(system_details(&mut app.state), top_left);
 
     // CPU Monitor
     let cpu_monitor_area = Block::default()
