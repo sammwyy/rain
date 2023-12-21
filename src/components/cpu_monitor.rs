@@ -33,7 +33,7 @@ pub fn cpu_monitor(state: &mut State) -> List {
         Block::default()
             .borders(Borders::all())
             .border_type(BorderType::Plain)
-            .title("System"),
+            .title("CPU"),
     );
     return component;
 }
